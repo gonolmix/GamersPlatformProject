@@ -1,38 +1,47 @@
 package by.gonol.project;
 
-import junit.framework.Test;
+import testdb.TestDataBase;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import models.Game;
+import models.Match;
+import models.Player;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import java.util.List;
+
+public class AppTest extends TestCase {
+
+    private TestDataBase db;
+
+    public void setUp() {
+        db = new TestDataBase();
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    public void testPlayers() {
+        Player alice = db.addPlayer("Alice");
+        Player bob = db.addPlayer("Bob");
+
+        assertEquals("Alice", db.getPlayer(alice.getId()).getName());
+        assertEquals(2, db.getAllPlayers().size());
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    public void testGames() {
+        Game g1 = db.addGame("Space", "Action");
+        Game g2 = db.addGame("Dragon", "RPG");
+
+        List<Game> rpg = db.getGamesByGenre("RPG");
+        assertEquals(1, rpg.size());
+        assertEquals("Dragon", rpg.get(0).getTitle());
+    }
+
+    public void testMatches() {
+        Player p1 = db.addPlayer("Alice");
+        Player p2 = db.addPlayer("Bob");
+        Game g = db.addGame("Space", "Action");
+
+        Match m = db.addMatch(g.getId(), p1.getId(), p2.getId(), "1-0");
+
+        List<Match> matches = db.getMatchesByPlayer(p1.getId());
+        assertEquals(1, matches.size());
+        assertEquals("1-0", matches.get(0).getResult());
     }
 }
