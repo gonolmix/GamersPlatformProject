@@ -1,0 +1,8 @@
+services\MatchesDAO.class
+connection\AppProperties.class
+models\Player.class
+services\PlayersDAO.class
+models\Match.class
+services\GamesDAO.class
+connection\ConnectionManager.class
+models\Game.class

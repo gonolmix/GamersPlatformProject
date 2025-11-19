@@ -6,7 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gamers-platform" />
+        <module name="module-core" />
+        <module name="module-cli" />
       </profile>
     </annotationProcessing>
   </component>
