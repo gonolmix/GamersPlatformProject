@@ -12,3 +12,5 @@ plugins {
 
 rootProject.name = "GradleGamersPlatform"
 include("app")
+include("module-cli")
+include("module-core")
